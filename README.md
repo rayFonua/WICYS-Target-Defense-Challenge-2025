@@ -1,324 +1,524 @@
-# 🛡️ WiCyS Target Defense Challenge 2025 – Writeups
+# 🛡️ WiCyS Target Defense Challenge 2025 – Complete Writeups
 
-My writeups and notes for the **WiCyS Target Defense Challenge 2025**.  
-This was my **first-ever CTF**, and out of 12 challenges, I solved **11 within one month**.  
-I ranked **25th out of 896 challengers**, which qualified me for Tier 2 taking place on the **August 21st**. 🚀
+<div align="center">
 
----
+![CTF Badge](https://img.shields.io/badge/CTF-WiCyS%202025-purple?style=for-the-badge&logo=security)
+![Challenges Solved](https://img.shields.io/badge/Challenges%20Solved-11%2F12-brightgreen?style=for-the-badge)
+![Ranking](https://img.shields.io/badge/Rank-25%2F896-gold?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Tier%202%20Qualified-blue?style=for-the-badge)
 
-## 📖 Overview
-I had the incredible opportunity to participate in the WiCyS Tier 1 Target Defense Challenge 2025.  
-This journey introduced me to new areas of cybersecurity, from packet analysis and system forensics to investigating insider threats.
+**My first-ever CTF experience that qualified me for Tier 2 competition**
 
-✨ **Highlights:**
-- 🏆 Solved **11/12 challenges**    
-- 🔍 Most memorable: **Challenge D12 – SD card forensic analysis**   
+[View Challenges](#-challenges) • [Key Learnings](#-key-learnings) • [Tools Used](#-tools-and-techniques)
 
----
-
-## 📂 Table of Contents
-- [D1 – Mystery Mail](#d1--mystery-mail)
-- [D2 – Not-so-Simple Mail Protocol](#d2--not-so-simple-mail-protocol)
-- [D3 – Ransom Wrangler](#d3--ransom-wrangler)
-- [D4 – Trout of Office](#d4--trout-of-office)
-- [D5 – Ahoy, PCAP 'n](#d5--ahoy-pcap-n)
-- [D6 – Smuggled Away!](#d6--smuggled-away)
-- [D7 – Endpoints and Exfiltration](#d7--endpoints-and-exfiltration)
-- [D8 – Shadow Commit](#d8--shadow-commit)
-- [D9 – Logging for Truth](#d9--logging-for-truth)
-- [D10 – Backup Break-in](#d10--backup-break-in)
-- [D11 – Semi-Final Boss](#d11--semi-final-boss)
-- [D12 – Final Boss](#d12--final-boss)
+</div>
 
 ---
 
-## 📨 D1 – Mystery Mail
-**Challenge Overview**  
-In this scenario context, I am a member of the Personalyze.io's Cybersecurity team and was notified of an extortion email in my inbox. This extortion email claimed to have stolen sensitive company data and demanded a ransom by threatening to release the data if the demand is not met within 48 hours. I needed to analyze the email headers and determine the sender’s original IP.  
+## 🎯 Achievement Summary
 
-**Approach & Solution**  
-- Opened the `.eml` file of the extortion email in Notepad to inspect the raw details  
-- I scanned and inspected the header section for the sender IP  
-- I then identified **252.44.98.29** as the originating IP, and it is associated with the email `sgreen123gwagm.co`
+This repository documents my complete journey through the **WiCyS Target Defense Challenge 2025 Tier 1**, where I achieved:
 
-  <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/34c2d07f-09a6-47dc-a8ef-336cc04c7552" />
+- 🏆 **11/12 challenges solved** within one month
+- 📊 **25th place** out of 896 participants   
+- 🚀 **Qualified for Tier 2** competition (August 21st, 2025)
+- 🌟 **First-ever CTF experience** 
 
-
-**Lessons Learnt**  
-- Attention to detail in headers is essential  
-- Context matters when interpreting evidence  
+### 💡 Most Memorable Challenge
+**D12 – Final Boss**: SD card forensic analysis involving embedded device investigation and Linux filesystem analysis.
 
 ---
 
-## 📧 D2 – Not-so-Simple Mail Protocol
-**Challenge Overview**  
-Still investigating the extortion attempts, I was tasked with uncovering **evidence of an earlier email** from the same threat actor by digging into the **SMTP logs** within the Insightful Horizon dashboard to find the first extortion message.  
+## 🔍 Challenge Categories
 
-**Approach & Solution**  
-- I logged into the Insightful Horizon dashboard and began filtering logs by the known domain `gwagm.co` and the term data.  
-- Eventually, I discovered a modified domain: **tgwanagm.co**.  
-- In that log entry, the subject line read: *“Warning: We have acquired sensitive data”* with the sender’s email address as **tharris456@tgwanagm.co**.
+<table>
+<tr>
+<td width="50%">
 
-<img width="800" height="800" alt="image" src="https://github.com/user-attachments/assets/189a8587-0a19-431b-a1f6-24337304215e" />
+### 📧 **Email & Communication**
+- D1: Mystery Mail
+- D2: Not-so-Simple Mail Protocol  
+- D3: Ransom Wrangler
 
+### 🌐 **Network & Traffic Analysis**
+- D5: Ahoy, PCAP 'n
+- D6: Smuggled Away!
+- D7: Endpoints and Exfiltration
 
-**Lessons Learnt**  
-- Filtering logs requires critical thinking and persistance  
-- Threata ctors often make subtle domain variations to bypass detection 
+</td>
+<td width="50%">
 
----
+### 💻 **System & Forensics**
+- D8: Shadow Commit
+- D9: Logging for Truth
+- D10: Backup Break-in
+- D11: Semi-Final Boss
+- D12: Final Boss
 
-## 💰 D3 – Ransom Wrangler
-**Challenge Overview**  
-This was an interesting challenge. Because the threat actor demanded a large ransom in Bitcoin, my task was to negotiate with the threat actor to reduce the ransom below **30 BTC** while also extending the payment deadline. 
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/d9ac60bb-6d1a-46eb-b6ed-68701792be81" />
+### ❓ **Unsolved**
+- D4: Trout of Office *(walkthrough included)*
 
-**Approach & Solution**  
-- Social engineering was used to persuade and engage tactics with the threat actor, it was quite difficult to apply these tactics.
-  <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/2239dea3-aaad-45dc-8bf9-5ad23fcbbb9f" />
-
-- I shifted the focus toward compromise, suggesting they would get paid faster if the ransom was lower by reducing the ransom to **25 BTC**  
-- Extracted flag: `CTF-RAN-FA5123FF: CTF-DEA-E86ED89E`  
-
-**Lessons Learnt**  
-- Social engineering can change outcomes in cybersecurity  
-- Negotiation skills matter, even in technical fields  
-
----
-
-## 🎣 D4 – Trout of Office
-I couldn’t solve this challenge in time, but reviewing the walkthrough showed me **exactly where I went wrong** and how to approach it differently next time. I have attached my version of the walkthrough below:   
-
-### 📝 Trout of Office Walkthrough
-
-There are a lot of logs of varying things, so let's separate them into two different categories:
-
-- **zekes-logs-...** – logs set up by Zeke, with a fishy theme. Each type maps to specific data:
-  - **salmon** – first names  
-  - **trout** – last names  
-  - **cod** – street addresses  
-  - **mackerel** – cities  
-  - **halibut** – states  
-  - **walleye** – zip codes  
-  - **snapper** – credit card numbers (last 4 digits only)  
-  - **tuna** – confusing noise data (ignore this one!)  
-
-- **http-logs** – HTTP traffic to access the Personalyz.io application.
-
-### 🔎 Tracking Down the Victim's Data
-
-The process is mostly the same for each type of information. We’ll start with the first name.
-
-#### 🧩 First Name
-
-1. Open the **zekes-logs-salmon** log in the Insightful Horizon dashboard.  
-2. Search for the victim’s first name. Example: `"John"`.  
-3. If nothing shows up, note that names are **prefixed with a letter**. Try wildcard searches: 
-4. Look for clues:
-   - Sockeye Salmon weight limits (7–8 kg → 7000–8000 grams).
-   - Fields like fnq... or alta with numeric values.
-5. Filter visually for numbers in the range 7000–8000.
-
-#### 🧩 Last Name
-
-1. Search for the victim’s last name, e.g. "Doe".
-2. Use a wildcard prefix search:.
-3. Look for clues:
-   - “Sharks and trout” hint → check the shark field.
-   - Filter records where shark values are between 7000 and 8000.
-4. Make a note of each shark + _vista__X... pair for later.
-
-#### 🧩 Address
-- The process is similar to names, but zip codes are stored as IDs. You’ll also need credit card info, which works the same way.
-
-#### 🌐 HTTP Logs – Pivoting to Requests
-At this step, switch to http-logs.
-We’re looking for requests without a User-Agent header (Zeke wouldn’t use a GenAI agent).
-1. Open the http-logs in the dashboard
-2. Filter out requests with User-Agent
-   - After filtering, you should have around 5 hits. 
-
-#### 🔗 Assembling the Data (so putting everything together)
-Now check each request to see if it contains useful info. Some values are query parameters, others are in the URI.
-Look for paths like:
-
-/apps_per-SAPSOFT/p/
-
-This takes two UUID-like IDs. Try inserting the IDs you found earlier for first and last names.
-
-##### For the first try
-<pre>curl -X GET "https://target-flask.chals.io/apps_per-SAPSOFT/p/1234/5678" </pre> 
-
-##### If first try fails, then reverse the order
-<pre> curl -X GET "https://target-flask.chals.io/apps_per-SAPSOFT/p/5678/1234"  </pre> 
-
-1234 = first name ID
-
-5678 = last name ID
- 
-If that works, you should see an ID returned. Keep it later for API calls.
-
-#### Address API Call
-For addresses, look for endpoints like:
-
-/l/a/
-
-Pass in the IDs for:
-- Street address (cod)
-- City (mackerel)
-- State (halibut)
-- Zip code (walleye)
+</td>
+</tr>
+</table>
 
 ---
 
-## 🌐 D5 – Ahoy, PCAP 'n
-**Challenge Overview**  
-For this challenge, I was tasked with investigating how a threat actor was exfiltrating sensitive company data and whether they were still active in our network. I did this by analysing the provided PCAP file to find the hostname of compromised machine and the Command and Control(C2) IP adress the attacker was using to recieve the leaked data.  
+## 📚 Challenges
 
-**Approach & Solution**  
-- I opened the PCAP in Wireshark and applied filters to focus on DNS traffic and paid attention to abnormal query patterns.
-<img width="550" height="550" alt="image" src="https://github.com/user-attachments/assets/f88df4d6-cbf1-4dfd-afa8-65049983ca2c" />
+### 📨 D1 – Mystery Mail
+> **Email Header Analysis | IP Attribution**
 
-- I noticed quite a few odd domain requests that were all irrelevant to each other, which led me to thinking I have stumbled what appears to be the use of DNS tunneling. Most of these came from an IP address of 10.75.34.13 and sending to an IP of 251.91.13.37, and by observing the response packets, a hostname of bvlik was found. 
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
 
-- Identified compromised host: **bvlik**  
-- C2 IP: **251.91.13.37**  
+As a member of Personalyze.io's Cybersecurity team, investigate an extortion email threatening to release stolen company data within 48 hours. Analyze email headers to determine the sender's original IP address.
+</details>
 
-**Lessons Learnt**  
-- DNS can be abused for stealthy exfiltration  
-- Wireshark is valuable for packet analysis  
-- Attackers can hide in plain sight with minimal traces  
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
 
----
+**Tools Used**: Notepad, Email Header Analysis
 
-## 📡 D6 – Smuggled Away!
-**Challenge Overview**  
-In this challenge, I had to extract the stolen data (credit card expiration, CVV, email) hidden in DNS queries.  
+**Methodology**:
+1. Opened `.eml` file in raw text format
+2. Systematically analyzed email headers
+3. Traced originating IP through header chain
+4. Correlated IP with sender domain
 
-**Approach & Solution**  
-- Filtered suspicious subdomains in Wireshark ip.src == 10.75.34.13 && ip.dst == 251.91.13.37
-  <img width="1169" height="614" alt="image" src="https://github.com/user-attachments/assets/dc0b1e17-1610-4990-abf7-73ef4b00b6e1" />
-  <img width="429" height="506" alt="image" src="https://github.com/user-attachments/assets/395f01c7-4c03-4839-a6ff-8c80fed732a5" />
-- I then extracted the suspicious looking subdomains by using Tshark, the command-line version of Wireshark via Powershell.
-<img width="1586" height="700" alt="image" src="https://github.com/user-attachments/assets/b5f691c4-1e09-401e-9eeb-595926e7c76a" />
+**Key Finding**: Originating IP `252.44.98.29` associated with `sgreen123@gwagm.co`
 
-  and then I ran the command
-  <pre> & "C:\Program Files\Wireshark\tshark.exe" -r "C:Desktop\pirates.pcap" -Y "ip.dst == 251.91.13.37 && dns.qry.name" -T fields -e dns.qry.name | Where-Object { ($_ -split '\.')[0] -match '^[a-zA-Z0-9]{5,}$' } | ForEach-Object { ($_ -split '\.')[0] }   </pre>
+![Email Analysis](https://github.com/user-attachments/assets/34c2d07f-09a6-47dc-a8ef-336cc04c7552)
+</details>
 
-  which extracts the DNS query names and filters only the subdomains we needed, it also removes the rest of the domain we do not need such as github.com or vimeo.com. I also combined all together using the command
-
-  <pre>($(& "C:\Program Files\Wireshark\tshark.exe" -r "C:Desktop\pirates.pcap" -Y "ip.dst == 251.91.13.37 && dns.qry.name" -T fields -e dns.qry.name | Where-Object { ($_ -split '\.')[0] -match '^[a-zA-Z0-9]{5,}$' } | ForEach-Object { ($_ -split '\.')[0] })) -join "" </pre>
-
-  which gave us the following
-  <pre> d6fqqaecfjjgqax7bxglcducgaiabuhz73remhou332tqyetdajb2zeqzgyway2mfzenv6x76ia665iwm4mk77pd3ygsbjbv6yqrp5hjqxr7us3qrffutqpqs3w3hqxqasrjuglwjtkr4g27dxmloddblphhtgw762oyehmxldaaxk4iunlbwjjbochhjqzh577bt4hmlrzqaaaa
- </pre>
-
-I then capitalised this string to give us the following and we will see later why.
-<pre> D6FQQAECFJJGQAX7BXGLCDUCGAIABUHZ73REMHOU332TQYETDAJB2ZEQZGYWAY2MFZENV6X76IA665IWM4MK77PD3YGSBJBV6YQRP5HJQXR7US3QRFFUTQPQS3W3HQXQASRJUGLWJTKR4G27DXMLODDBLPHHTGW762OYEHMXLDAAXK4IUNLBWJJBOCHHJQZH577BT4HMLRZQAAAA </pre>
-
-- Used **CyberChef** to decode from Base32, which requires the string to be uppercase and consist of number from 2-7 which we have, and then I applied the Gunzip option to uncompress the string
-<img width="1912" height="551" alt="image" src="https://github.com/user-attachments/assets/6b887c23-ddba-49a9-a168-4c69ba611d43" />
-
-- Successfully reconstructed sensitive data: Alec	SHERMAN	4167 East 3rd Spur	Central Islip	NY	11722	(215) 835-2392	alec@sbcglobal.net	342644019686141	0016	11/30   
-
-**Lessons Learnt**  
-- DNS traffic can contain encoded data exfiltration, which is another form of a cyberattack used to steal data seen in this scenario   
-- CyberChef is a must-have decoding tool  
-- One single missing letter can ruin the entire decryption, so I do not recommend extracting manually, ever.   
+**🎓 Key Learnings**:
+- Email header forensics fundamentals
+- IP attribution techniques
+- Importance of systematic evidence examination
 
 ---
 
-## 🖥️ D7 – Endpoints and Exfiltration
-**Challenge Overview**  
-Identify user, process, and software responsible for exfiltration using `lsof`, `ps`, and `history` outputs.  
+### 📧 D2 – Not-so-Simple Mail Protocol  
+> **SMTP Log Analysis | Domain Spoofing Detection**
 
-**Approach & Solution**  
-- Correlated IP from D5 with lsof connections  
-- Confirmed process via ps output  
-- Traced obfuscated filename in history file  
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
 
-**Lessons Learnt**  
-- Endpoint telemetry reveals hidden activity  
-- Cross-referencing multiple logs paints a complete picture  
-- Threat actors often disguise tools under benign names  
+Continue investigating the threat actor by analyzing SMTP logs in the Insightful Horizon dashboard to uncover evidence of earlier extortion attempts.
+</details>
 
----
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
 
-## 🔎 D8 – Shadow Commit
-**Challenge Overview**  
-Analyze `.git` directory history to identify malicious commit introducing an IP.  
+**Tools Used**: Insightful Horizon Dashboard, Log Filtering
 
-**Approach & Solution**  
-- Used `git log` and `git diff`  
-- Found commit with hardcoded malicious IP  
-- Extracted commit hash + IPv4 address  
+**Methodology**:
+1. Applied strategic log filtering using known domains
+2. Identified domain variations and typosquatting
+3. Discovered modified domain: `tgwanagm.co`
+4. Located earlier threat: `tharris456@tgwanagm.co`
 
-**Lessons Learnt**  
-- Git commit history can expose supply chain compromise  
-- Understanding Git tools is essential for forensic developers  
+**Key Finding**: Subject line "*Warning: We have acquired sensitive data*"
 
----
+![SMTP Logs](https://github.com/user-attachments/assets/189a8587-0a19-431b-a1f6-24337304215e)
+</details>
 
-## 📜 D9 – Logging for Truth
-**Challenge Overview**  
-Verify whether developer Erik really authored a shady commit or was framed.  
-
-**Approach & Solution**  
-- Used Insightful Horizon logs  
-- Filtered audit logs over 6 months  
-- Found commit tied to suspicious IP not belonging to Erik  
-
-**Lessons Learnt**  
-- Commit history ≠ proof of authorship  
-- Audit logs are crucial for attribution  
+**🎓 Key Learnings**:
+- Advanced log filtering strategies
+- Domain spoofing detection techniques
+- Threat actor operational patterns
 
 ---
 
-## 💾 D10 – Backup Break-in
-**Challenge Overview**  
-Find Git committer’s leaked credentials in backup server files.  
+### 💰 D3 – Ransom Wrangler
+> **Social Engineering | Negotiation Tactics**
 
-**Approach & Solution**  
-- Extracted `.tar.gz` archive  
-- Searched plaintext configs  
-- Found password starting with `wicys`  
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
 
-**Lessons Learnt**  
-- Backup servers often expose sensitive data  
-- Simple text searches can reveal critical evidence  
+Negotiate with the threat actor to reduce their Bitcoin ransom demand below 30 BTC while extending the payment deadline.
+</details>
 
----
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
 
-## 🗝️ D11 – Semi-Final Boss
-**Challenge Overview**  
-Analyze Windows Registry hive for persistence keys on “clean” host.  
+**Tools Used**: Social Engineering Principles, Negotiation Psychology
 
-**Approach & Solution**  
-- Loaded hive in **Registry Explorer**  
-- Investigated `Run`, `Services`, and `Winlogon` keys  
-- Found suspicious persistence key linked to non-native executable  
+**Methodology**:
+1. Applied psychological negotiation tactics
+2. Focused on mutual benefit (faster payment vs. lower amount)
+3. Successfully reduced ransom to **25 BTC**
+4. Secured deadline extension
 
-**Lessons Learnt**  
-- Registry artifacts are attacker footprints  
-- Specialized forensic tools are vital for safe analysis  
+**Flag Extracted**: `CTF-RAN-FA5123FF: CTF-DEA-E86ED89E`
 
----
+![Negotiation Process](https://github.com/user-attachments/assets/2239dea3-aaad-45dc-8bf9-5ad23fcbbb9f)
+</details>
 
-## 🎮 D12 – Final Boss
-**Challenge Overview**  
-Investigate forensic image of SD card tied to TinyPilot device.  
-
-**Approach & Solution**  
-- Mounted SD card image in Linux VM  
-- Found Raspberry Pi boot partition  
-- Located IOC: **hardcoded URL in startup script**  
-
-**Lessons Learnt**  
-- Embedded devices can be repurposed for insider threats  
-- Linux knowledge is critical for deep-dive forensics  
-- TinyPilot tools need monitoring to prevent abuse  
+**🎓 Key Learnings**:
+- Social engineering in cybersecurity context
+- Negotiation psychology and tactics
+- Crisis communication strategies
 
 ---
 
+### 🎣 D4 – Trout of Office *(Unsolved - Walkthrough Included)*
+> **Complex Log Correlation | Data Reconstruction**
 
+<details>
+<summary><strong>❗ Challenge Analysis</strong></summary>
 
+While I didn't solve this during the competition, I've documented the complete solution methodology for future reference.
+
+**Challenge Complexity**: Multi-layered log correlation with themed data mapping
+- **zekes-logs-***: Fish-themed data categories (salmon=first names, trout=last names, etc.)
+- **http-logs**: Application traffic analysis
+- **Pivot Technique**: User-Agent filtering for non-automated requests
+
+</details>
+
+<details>
+<summary><strong>📝 Complete Walkthrough</strong></summary>
+
+#### Data Categories Mapping
+| Fish Type | Data Type | Weight Range |
+|-----------|-----------|--------------|
+| Salmon | First Names | 7000-8000g |
+| Trout | Last Names | 7000-8000g |
+| Cod | Street Addresses | - |
+| Mackerel | Cities | - |
+| Halibut | States | - |
+| Walleye | Zip Codes | - |
+| Snapper | Credit Card (last 4) | - |
+| Tuna | Noise Data (ignore) | - |
+
+#### Solution Process
+1. **Name Extraction**: Search with wildcard prefixes, filter by weight ranges
+2. **HTTP Log Pivot**: Filter requests without User-Agent headers
+3. **Data Assembly**: Use UUID-like IDs in API endpoints
+4. **Final Reconstruction**: Combine all data points through API calls
+
+```bash
+# Example API call structure
+curl -X GET "https://target-flask.chals.io/apps_per-SAPSOFT/p/[FIRST_NAME_ID]/[LAST_NAME_ID]"
+```
+</details>
+
+**🎓 Key Learnings**:
+- Complex multi-source data correlation
+- API endpoint reconstruction techniques
+- Importance of systematic approach to complex challenges
+
+---
+
+### 🌐 D5 – Ahoy, PCAP 'n
+> **Network Traffic Analysis | DNS Tunneling Detection**
+
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
+
+Investigate how a threat actor is exfiltrating sensitive company data by analyzing network traffic. Identify the compromised machine's hostname and the Command & Control (C2) server IP.
+</details>
+
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
+
+**Tools Used**: Wireshark, DNS Analysis, Traffic Filtering
+
+**Methodology**:
+1. Applied DNS traffic filters in Wireshark
+2. Identified suspicious domain query patterns
+3. Discovered DNS tunneling indicators
+4. Traced communication flow: `10.75.34.13 → 251.91.13.37`
+
+**Key Findings**:
+- Compromised host: **bvlik**
+- C2 IP: **251.91.13.37**
+- Attack vector: DNS tunneling
+
+![Network Analysis](https://github.com/user-attachments/assets/f88df4d6-cbf1-4dfd-afa8-65049983ca2c)
+</details>
+
+**🎓 Key Learnings**:
+- DNS tunneling detection techniques
+- Network traffic pattern analysis
+- Wireshark advanced filtering
+
+---
+
+### 📡 D6 – Smuggled Away!
+> **Data Exfiltration | Encoding/Decoding**
+
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
+
+Extract stolen data (credit card details, personal information) hidden within DNS queries using encoding techniques.
+</details>
+
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
+
+**Tools Used**: Wireshark, Tshark, PowerShell, CyberChef
+
+**Methodology**:
+1. Filtered suspicious DNS queries using Wireshark
+2. Extracted subdomains using Tshark command-line tool
+3. Applied PowerShell regex for data cleaning
+4. Decoded Base32 + Gunzip in CyberChef
+
+**Tshark Command**:
+```powershell
+& "C:\Program Files\Wireshark\tshark.exe" -r "C:Desktop\pirates.pcap" -Y "ip.dst == 251.91.13.37 && dns.qry.name" -T fields -e dns.qry.name | Where-Object { ($_ -split '\.')[0] -match '^[a-zA-Z0-9]{5,}$' } | ForEach-Object { ($_ -split '\.')[0] }
+```
+
+**Extracted Data**: Complete PII including name, address, phone, email, credit card details
+
+![Data Extraction](https://github.com/user-attachments/assets/6b887c23-ddba-49a9-a168-4c69ba611d43)
+</details>
+
+**🎓 Key Learnings**:
+- DNS data exfiltration techniques  
+- Base32 encoding/decoding
+- Command-line forensics with Tshark
+- Importance of automated extraction over manual methods
+
+---
+
+### 🖥️ D7 – Endpoints and Exfiltration
+> **Endpoint Forensics | Process Analysis**
+
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
+
+Identify the user, process, and software responsible for data exfiltration using system telemetry data.
+</details>
+
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
+
+**Tools Used**: lsof, ps, history analysis
+
+**Methodology**:
+1. Correlated network connections with known C2 IP
+2. Cross-referenced active processes
+3. Analyzed command history for obfuscated tools
+4. Identified responsible user and process
+
+</details>
+
+**🎓 Key Learnings**:
+- Endpoint telemetry correlation
+- Process forensics techniques
+- Command history analysis for threat hunting
+
+---
+
+### 🔎 D8 – Shadow Commit  
+> **Git Forensics | Supply Chain Security**
+
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
+
+Analyze Git repository history to identify a malicious commit that introduced a hardcoded malicious IP address.
+</details>
+
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
+
+**Tools Used**: Git CLI, Repository Analysis
+
+**Methodology**:
+1. Used `git log` for commit history review
+2. Applied `git diff` for change analysis
+3. Identified commit with suspicious IP injection
+4. Extracted commit hash and malicious IPv4
+
+</details>
+
+**🎓 Key Learnings**:
+- Git forensics for supply chain attacks
+- Repository history analysis
+- Developer tool security implications
+
+---
+
+### 📜 D9 – Logging for Truth
+> **Attribution Analysis | Audit Log Investigation**
+
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
+
+Determine whether developer Erik was truly responsible for a suspicious commit or if he was framed by analyzing audit logs.
+</details>
+
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
+
+**Tools Used**: Insightful Horizon Dashboard, Audit Log Analysis
+
+**Methodology**:
+1. Filtered 6 months of audit logs
+2. Cross-referenced commit timestamps with user activity
+3. Identified IP address mismatches
+4. Proved Erik's innocence through location data
+
+</details>
+
+**🎓 Key Learnings**:
+- Importance of audit trails in attribution
+- Git commit spoofing techniques
+- Digital forensics investigation methodology
+
+---
+
+### 💾 D10 – Backup Break-in
+> **Credential Discovery | Archive Analysis**
+
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
+
+Locate leaked credentials belonging to the Git committer within backup server files.
+</details>
+
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
+
+**Tools Used**: Archive Extraction, Text Search, File Analysis
+
+**Methodology**:
+1. Extracted `.tar.gz` backup archive
+2. Performed systematic plaintext searches
+3. Located configuration files with embedded credentials
+4. Found password beginning with `wicys`
+
+</details>
+
+**🎓 Key Learnings**:
+- Backup server security risks
+- Credential exposure in configuration files
+- Systematic evidence search techniques
+
+---
+
+### 🗝️ D11 – Semi-Final Boss
+> **Windows Registry Forensics | Persistence Analysis**
+
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
+
+Analyze a Windows Registry hive to identify persistence mechanisms on a supposedly "clean" host.
+</details>
+
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
+
+**Tools Used**: Registry Explorer, Windows Forensics
+
+**Methodology**:
+1. Loaded Registry hive safely in specialized tool
+2. Investigated common persistence locations:
+   - `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+   - Services keys
+   - Winlogon keys
+3. Found suspicious persistence key with non-native executable
+
+</details>
+
+**🎓 Key Learnings**:
+- Windows Registry forensics
+- Persistence mechanism identification  
+- Importance of specialized forensic tools
+
+---
+
+### 🎮 D12 – Final Boss  
+> **Embedded Device Forensics | Linux Filesystem Analysis**
+
+<details>
+<summary><strong>🎯 Challenge Brief</strong></summary>
+
+Investigate a forensic image of an SD card connected to a TinyPilot device suspected of insider threat activity.
+</details>
+
+<details>
+<summary><strong>🔧 Solution Approach</strong></summary>
+
+**Tools Used**: Linux VM, Filesystem Analysis, Device Forensics
+
+**Methodology**:
+1. Mounted SD card image in controlled Linux environment
+2. Analyzed Raspberry Pi boot partition structure
+3. Examined startup scripts and configuration files
+4. Located hardcoded malicious URL in boot sequence
+
+**Key Finding**: IOC embedded in device startup script - potential insider threat tool
+
+</details>
+
+**🎓 Key Learnings**:
+- Embedded device security analysis
+- Linux forensics techniques
+- TinyPilot device architecture understanding
+- Insider threat detection in IoT devices
+
+---
+
+## 🛠️ Tools and Techniques
+
+<div align="center">
+
+### 🔍 **Analysis Tools**
+![Wireshark](https://img.shields.io/badge/Wireshark-1679A7?style=flat-square&logo=wireshark&logoColor=white)
+![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+
+### 🔧 **Specialized Tools**
+![Registry Explorer](https://img.shields.io/badge/Registry%20Explorer-0078D4?style=flat-square&logo=windows&logoColor=white)
+![CyberChef](https://img.shields.io/badge/CyberChef-FF6B35?style=flat-square&logo=chef&logoColor=white)
+![Tshark](https://img.shields.io/badge/Tshark-1679A7?style=flat-square&logo=wireshark&logoColor=white)
+
+</div>
+
+### 📊 Techniques Mastered
+
+| Category | Skills Developed |
+|----------|------------------|
+| **Network Analysis** | DNS tunneling detection, PCAP analysis, C2 identification |
+| **Email Forensics** | Header analysis, SMTP log investigation, domain spoofing |
+| **System Forensics** | Registry analysis, process investigation, endpoint telemetry |
+| **Data Recovery** | Archive extraction, encoding/decoding, credential discovery |
+| **Git Forensics** | Repository analysis, commit investigation, supply chain security |
+| **Social Engineering** | Negotiation tactics, psychological principles, crisis communication |
+
+---
+
+## 📈 Key Learnings
+
+### 🎯 Technical Skills Gained
+- **Network Security**: Advanced PCAP analysis and DNS tunneling detection
+- **Digital Forensics**: Multi-platform evidence correlation and timeline analysis  
+- **Threat Intelligence**: IOC identification and threat actor behavior analysis
+- **Incident Response**: Systematic investigation methodology and evidence preservation
+
+### 🧠 Strategic Insights
+- **Holistic Thinking**: Complex challenges require multi-tool, multi-perspective approaches
+- **Attention to Detail**: Single character errors can compromise entire investigations
+- **Systematic Approach**: Methodical evidence collection prevents overlooked clues
+- **Tool Diversity**: Different challenges require specialized forensic tools
+
+### 🚀 Personal Growth
+- **Resilience**: Learned to approach unsolved challenges as learning opportunities
+- **Documentation**: Comprehensive writeups enhance knowledge retention and sharing
+- **Community**: CTF participation builds valuable cybersecurity networks
+- **Confidence**: First CTF success established a foundation for continued security research
+
+---
+
+## 📄 License & Usage
+
+This repository is for **educational purposes** and knowledge sharing within the cybersecurity community. All write-ups represent original analysis and investigation work.
+
+**⚠️ Ethical Use Only**: These techniques should only be applied in authorized, legal environments for legitimate security research and education.
+
+---
